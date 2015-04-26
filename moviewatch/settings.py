@@ -140,11 +140,12 @@ SUIT_CONFIG = {
 
     # menu
     'SEARCH_URL': '/admin/movies/film/',
-    # 'MENU_ICONS': {
-    #    'sites': 'icon-leaf',
-    #    'auth': 'icon-lock',
-    # },
-    # 'MENU_OPEN_FIRST_CHILD': True, # Default True
+    'MENU_ICONS': {
+       # 'sites': 'icon-leaf',
+       'auth': 'icon-lock',
+       'movies': 'icon-film',
+    },
+    # 'MENU_OPEN_FIRST_CHILD': False, # Default True
     # 'MENU_EXCLUDE': ('auth.group',),
     # 'MENU': (
     #     'sites',
