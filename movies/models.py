@@ -33,7 +33,7 @@ class Film(models.Model):
         if self.filepath and self.filepath.url:
             return self.filepath.url
         else:
-            return "/media/films/no_film.mov"
+            return "/media/films/no_film.ogg"
 
     def __str__(self):
         return self.name
