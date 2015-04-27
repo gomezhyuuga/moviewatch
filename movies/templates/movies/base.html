@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Movie Watch</title>
+    {% include "movies/base_header.html" %}
+    {% block header %}{% endblock %}
+  </head>
+  <body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        {% block navbar %}
+          {% include "movies/base_navbar.html" %}
+        {% endblock %}
+      </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="container">
+      <div class="row">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  
+    <!-- FOOTER -->
+    <footer>
+    <div class="container">
+        {% include "movies/base_footer.html" %}
+        {% block footer %}{% endblock %}
+    </div>
+    </footer>      
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static "movies/js/jquery.min.js" %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static "movies/bootstrap/js/bootstrap.min.js" %}"></script>
+  </body>
+</html>
