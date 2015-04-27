@@ -1,5 +1,2 @@
-* Finalizado Film details
-- Página de detalle del Film /catalog/:film_id
-- Film Model:
-Agregado método para obtener la url del film o un placeholder si no tiene
-- Incrementado tamaño del poster el los detalles de la película
+- Cambiado formato de film por defecto a ogg
+- Agregados enlaces en navbar y sidebar

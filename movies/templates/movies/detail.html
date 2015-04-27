@@ -8,9 +8,9 @@
   <div class="row">
     <div id="film-video">
       <video height="100%" controls>
+        <source src="{% static film.film_url %}" type="video/webm"/>
         <source src="{% static film.film_url %}" type="video/ogg"/>
         <source src="{% static film.film_url %}" type="video/mp4"/>
-        <source src="{% static film.film_url %}" type="video/webm"/>
       </video>
     </div>
   </div>
