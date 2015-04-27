@@ -1,0 +1,66 @@
+{% extends "movies/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<section id="film-details">
+  <h1 class="center">Ready to watch your movie?</h1>
+  <div class="row">
+    <div id="film-video">
+      <video height="100%" controls>
+        <source src="{% static film.film_url %}" type="video/ogg"/>
+        <source src="{% static film.film_url %}" type="video/mp4"/>
+        <source src="{% static film.film_url %}" type="video/webm"/>
+      </video>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="film-poster">
+        <a href="#" class="shadow">
+          <img src="{% static film.poster_url %}" alt="Movie poster"
+          width="100%">
+        </a>
+      </div>
+    </div>
+    <!-- MOVIE DETAILS -->
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>{{ film.name }}</h2>
+          <h6>Director:</h6> <a href="#">{{ film.director | title }}</a>
+          <br>
+          <h6>Género: </h6> <a href="#">{{ film.genre | title }}</a>
+          <br>
+          <h6>Lanzamiento: </h6> {{ film.releasedate }}
+          <br>
+          <h6>Duración: </h6> {{ film.duration }}
+        </div>
+        <!-- RATING BOX -->
+        <div class="col-md-4">
+          <div class="rating-box">
+            <h1>Rating</h1>
+            <span class="rating">{{ film.rating }}</span>
+          </div>
+          <div class='rating_selection'>
+            <input id="film-rating" type="number" class="rating"
+            min=0 max=10 step=2
+            data-show-clear="false"
+            data-show-caption="false"
+            value="{{ film.rating }}" 
+            glyphicon="false"
+            rating-class="rating-fa="
+            data-size="xs">
+          </div>
+        </div>
+      </div>
+      <h3>Sinópsis</h3>
+      <p>
+        {{ film.description }}
+      </p>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

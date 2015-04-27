@@ -9,7 +9,7 @@
   <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" id="main-navbar">
       <div class="container-fluid">
         {% block navbar %}
           {% include "movies/base_navbar.html" %}
@@ -20,7 +20,12 @@
     <!-- CONTENT -->
     <div class="container">
       <div class="row">
-        {% block content %}{% endblock %}
+        <div id="sidebar" class="col-md-2">
+          {% include "base_sidebar.html" %}
+        </div>
+        <div id="page-content" class="col-md-10">
+          {% block content %}{% endblock %}
+        </div>
       </div>
     </div>
   
@@ -35,5 +40,7 @@
     <script src="{% static "movies/js/jquery.min.js" %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static "movies/bootstrap/js/bootstrap.min.js" %}"></script>
+    <!-- STAR RATING -->
+    <script src="{% static "movies/star-rating/js/star-rating.min.js" %}"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Film
 
@@ -11,4 +11,6 @@ def catalog(request):
   return render(request, "movies/catalog.html", context)
 
 def detail(request, film_id):
-  return HttpResponse("DETAIL PAGE FOR %s"%film_id)
+  film = get_object_or_404(Film, pk=film_id)
+  context = {'film': film}
+  return render(request, "movies/detail.html", context)

@@ -4,6 +4,7 @@ from .models import *
 
 # Custom admin page
 class FilmAdmin(admin.ModelAdmin):
+  list_display = ('name', 'director', 'genre', 'rating')
   search_fields = ['name']
   list_filter = ('director',)
 

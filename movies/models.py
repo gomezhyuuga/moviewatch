@@ -11,6 +11,38 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+class Film(models.Model):
+    id = models.AutoField(db_column='idFilm', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(max_length=100, blank=True, null=True)
+    genre = models.CharField(max_length=45, blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    releasedate = models.DateField(db_column='releaseDate', blank=True, null=True)  # Field name made lowercase.
+    director = models.CharField(max_length=200, blank=True, null=True)
+    duration = models.IntegerField(blank=True, null=True)
+    # filepath = models.CharField(max_length=200, blank=True, null=True)
+    filepath = models.FileField(upload_to='films', blank=True)
+    poster = models.ImageField(upload_to='posters/%Y%m%d',blank=True)
+
+    def poster_url(self):
+        if self.poster and self.poster.url:
+            return self.poster.url
+        else:
+            return "movies/images/no_poster.png"
+    def film_url(self):
+        if self.filepath and self.filepath.url:
+            return self.filepath.url
+        else:
+            return "/media/films/no_film.mov"
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        managed = False
+        db_table = 'Film'
+        ordering = ['name']
+
 
 class Account(models.Model):
     id = models.AutoField(db_column='idAccount', primary_key=True)  # Field name made lowercase.
@@ -54,34 +86,6 @@ class Country(models.Model):
     class Meta:
         managed = False
         db_table = 'Country'
-
-
-class Film(models.Model):
-    id = models.AutoField(db_column='idFilm', primary_key=True)  # Field name made lowercase.
-    name = models.CharField(max_length=100, blank=True, null=True)
-    genre = models.CharField(max_length=45, blank=True, null=True)
-    rating = models.FloatField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    releasedate = models.DateField(db_column='releaseDate', blank=True, null=True)  # Field name made lowercase.
-    director = models.CharField(max_length=200, blank=True, null=True)
-    duration = models.IntegerField(blank=True, null=True)
-    # filepath = models.CharField(max_length=200, blank=True, null=True)
-    filepath = models.FileField(upload_to='films', blank=True)
-    poster = models.ImageField(upload_to='posters/%Y%m%d',blank=True)
-
-    def poster_url(self):
-        if self.poster and self.poster.url:
-            return self.poster.url
-        else:
-            return "movies/images/no_poster.png"
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        managed = False
-        db_table = 'Film'
-
 
 class FilmCatalog(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.

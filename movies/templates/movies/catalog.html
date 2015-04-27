@@ -2,32 +2,27 @@
 {% load staticfiles %}
 
 {% block content %}
-<div id="sidebar" class="col-md-2">
-  {% include "base_sidebar.html" %}
-</div>
-<div id="page-content" class="col-md-10">
-  <h2>Películas</h2>
-  <section id="film-list">
 
-    {% if not list %}
-    <h2>No movies</h2>
-    {% else %}
-    {% for film in list %}
-    <div class="film-item">
-      <div class="content" style="background-image: url('{% static film.poster_url %}')">
-        <div class="film-poster">
-          <a href="{% url 'movies:detail' film.id %}">
-            <img src="{% static film.poster_url %}" alt="film image">
-          </a>
-        </div>
-        <div class="film-title">
-          {{ film.name | truncatechars:18 }}
-        </div>
+<h2>Películas</h2>
+<section id="film-list">
+  {% if not list %}
+  <h2>No movies</h2>
+  {% else %}
+  {% for film in list %}
+  <div class="film-item">
+    <div class="content" style="background-image: url('{% static film.poster_url %}')">
+      <div class="film-poster">
+        <a href="{% url 'movies:detail' film.id %}">
+          <img src="{% static film.poster_url %}" alt="film image">
+        </a>
+      </div>
+      <div class="film-title">
+        {{ film.name | truncatechars:22 }}
       </div>
     </div>
-    {% endfor %}
-    {% endif %}
+  </div>
+  {% endfor %}
+  {% endif %}
+</section>
 
-  </section>
-</div>
 {% endblock %}
