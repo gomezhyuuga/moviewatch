@@ -1,0 +1,42 @@
+{% extends "movies/base.html" %}
+{% load staticfiles %}
+
+{% block container %}
+
+<div class="row" id="login-page">
+  <h1>I'm ready to watch...</h1>
+
+  {% if errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+
+  <form action="{% url "movies:login" %}" method="POST">
+    {% csrf_token %}
+    <div class="col-md-4 col-md-offset-4">
+      <div class="form-group">
+        <input type="text"
+          class="input-lg form-control"
+          autocomplete="off"
+          placeholder="Username"
+          name="username">
+      </div>
+      <div class="form-group">
+        <input type="password"
+          class="input-lg form-control"
+          autocomplete="off"
+          placeholder="Password"
+          name="password">
+      </div>
+      <br>
+      <button class="form-control input-lg">
+        <i class="fa fa-sign-in"></i>
+        Login
+      </button>
+
+      <input type="hidden" name="next" value="{{ next }}" />
+    </div>
+  </form>
+</div>
+
+{% endblock %}

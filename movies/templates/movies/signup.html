@@ -1,0 +1,19 @@
+{% extends "movies/base.html" %}
+{% load staticfiles %}
+
+{% block container %}
+
+<div class="row" id="signup-page">
+  <div class="col-md-8 col-md-offset-2">
+    <form action="" class="form-horizontal">
+      <div class="form-group">
+        {{ form.username.label_tag }}
+        <div class="col-sm-9">
+          {{ form.username }}
+        </div>
+      </div>
+    </form>    
+  </div>
+</div>
+
+{% endblock %}

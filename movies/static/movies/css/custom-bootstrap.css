@@ -29,19 +29,6 @@
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   color: #ffffff;
 }
-.navbar-default .navbar-nav > li > .dropdown-menu {
-  background-color: #5d8bde;
-}
-.navbar-default .navbar-nav > li > .dropdown-menu > li > a {
-  color: #c7eef7;
-}
-.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
-.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
-  color: #ffffff;
-  background-color: #2d6291;
-}
-.navbar-default .navbar-nav > li > .dropdown-menu > li > .divider {
-  background-color: #5d8bde;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
   color: #ffffff;
@@ -71,15 +58,47 @@
   color: #ffffff;
 }
 
-@media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #c7eef7;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #ffffff;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #ffffff;
-    background-color: #2d6291;
-  }
+
+
+input.form-control {
+  /* input: */
+  background: #26292E;
+  border: 1px solid #232323;
+  box-shadow: 0px 1px 0px 0px rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+
+input.form-control::-webkit-input-placeholder {
+  font-family: Helvetica;
+  color: #3A3C3D;
+}
+
+input.form-control:-moz-placeholder { /* Firefox 18- */
+  font-family: Helvetica;
+  color: #3A3C3D;
+}
+
+input.form-control::-moz-placeholder {  /* Firefox 19+ */
+  font-family: Helvetica;
+  color: #3A3C3D;
+}
+
+input.form-control:-ms-input-placeholder {  
+  font-family: Helvetica;
+  color: #3A3C3D;
+}
+
+input[type="submit"], button.form-control {
+  /* Rectangle 9: */
+  background: #FFFFFF;
+  background-image: linear-gradient(-180deg, #DE785D 0%, #DE5D5D 100%);
+  border: 1px solid #861F05;
+  box-shadow: 0px 1px 0px 0px rgba(255,255,255,0.40), inset 0px 1px 0px 0px rgba(255,255,255,0.30);
+  border-radius: 2px;
+
+  /* Login: */
+  font-family: "Helvetica";
+  font-weight: bold;
+  color: #582A25;
+  text-shadow: 0px 1px 1px rgba(255,255,255,0.20);
 }

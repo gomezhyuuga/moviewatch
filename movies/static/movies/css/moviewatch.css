@@ -267,6 +267,13 @@ span.rating {
   background-color: #26292E;
 }
 
+#login-page h1 {
+  text-align: center;
+  margin-bottom: 1em;
+}
+#login-page {
+  margin-bottom: 5em;
+}
 
 .center {
   text-align: center;

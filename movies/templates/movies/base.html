@@ -19,6 +19,7 @@
 
     <!-- CONTENT -->
     <div class="container">
+      {% block container %}
       <div class="row">
         <div id="sidebar" class="col-md-2">
           {% include "base_sidebar.html" %}
@@ -27,6 +28,7 @@
           {% block content %}{% endblock %}
         </div>
       </div>
+      {% endblock %}
     </div>
   
     <!-- FOOTER -->

@@ -9,6 +9,7 @@
 # into your database.
 from __future__ import unicode_literals
 
+from django.contrib.auth.models import User
 from django.conf import settings
 
 from django.db import models
@@ -56,6 +57,8 @@ class Account(models.Model):
     address = models.CharField(max_length=45, blank=True, null=True)
     member_since = models.DateField(db_column='memberSince', blank=True, null=True)  # Field name made lowercase.
     password = models.CharField(max_length=45, blank=True, null=True)
+
+    user = models.OneToOneField(User)
 
     def __str__(self):
         return self.username
