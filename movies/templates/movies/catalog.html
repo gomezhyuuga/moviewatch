@@ -5,10 +5,8 @@
 
 <h2>Películas</h2>
 <section id="film-list">
-  {% if not list %}
-  <h2>No movies</h2>
-  {% else %}
-  {% for film in list %}
+  {% if filter %}
+  {% for film in filter %}
   <div class="film-item">
     <div class="content" style="background-image: url('{% static film.poster_url %}')">
       <div class="film-poster">
@@ -22,6 +20,8 @@
     </div>
   </div>
   {% endfor %}
+  {% else %}
+  <h2>No movies</h2>
   {% endif %}
 </section>
 

@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
+    'debug_toolbar',
     'movies',
 )
 
@@ -81,12 +83,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
         'PORT': 3306,
-        'NAME': 'moviewatch',
+        'NAME': 'moviewatch_master',
         'USER': 'appuser',
         'PASSWORD': '1234',
     }
 }
-
+# DATABASE_ROUTERS = ['SlaveRouter']
+FILM_CATALOG = 'Film'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

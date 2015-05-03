@@ -1,11 +1,13 @@
 <h2>Géneros</h2>
 <ul>
-  <li class="active"><a href="{% url 'movies:catalog' %}">Todos</a></li>
-  <li><a href="#">Terror</a></li>
-  <li><a href="#">Comedia</a></li>
-  <li><a href="#">Acción</a></li>
-  <li><a href="#">Animada</a></li>
-  <li><a href="#">Independiente</a></li>
-  <li><a href="#">Música</a></li>
-  <li><a href="#">Sci-Fi</a></li>
+  <li>
+    {% if filter.data %}
+    <a href="{% url 'movies:catalog' %}">Todos</a>
+    {% else %}
+    <a class="selected" href="{% url 'movies:catalog' %}">Todos</a>
+    {% endif %}
+  </li>
 </ul>
+<form action="" method="get">
+  {{ filter.form.genre }}
+</form>

@@ -9,6 +9,8 @@
 # into your database.
 from __future__ import unicode_literals
 
+from django.conf import settings
+
 from django.db import models
 
 class Film(models.Model):
@@ -40,7 +42,7 @@ class Film(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'Film'
+        db_table = settings.FILM_CATALOG
         ordering = ['name']
 
 

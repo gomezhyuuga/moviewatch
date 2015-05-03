@@ -81,6 +81,10 @@ a {
   line-height: 26px;
   /*color: #798286;*/
 }
+#sidebar li {
+  list-style: none;
+  text-transform: uppercase;
+}
 #sidebar a {
   color: #798286;
 }
@@ -89,7 +93,7 @@ a {
   text-decoration: none;
   transition: all 0.2s linear;
 }
-#sidebar li.active a {
+#sidebar li a.selected {
   color: #DE5D62;
   font-weight: normal;
 }
