@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
         'PORT': 3306,
-        'NAME': 'moviewatch_master',
+        'NAME': 'moviewatch',
         'USER': 'appuser',
         'PASSWORD': '1234',
     }

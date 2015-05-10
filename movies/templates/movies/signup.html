@@ -4,12 +4,55 @@
 {% block container %}
 
 <div class="row" id="signup-page">
+  <h1 class="center">Are you ready?</h1>
+
+  <!-- <p>
+    {{ user_form.is_valid }}
+    {{ account_form.is_valid }}
+  </p> -->
+  <!-- <p>
+    {{ user_form.errors }}
+    {{ account_form.errors }}
+  </p> -->
+
   <div class="col-md-8 col-md-offset-2">
-    <form action="" class="form-horizontal">
+    <form action="{% url "movies:signup" %}" method="POST" class="form-horizontal">
+      {% csrf_token %}
+
+      {% for field in user_form %}
       <div class="form-group">
-        {{ form.username.label_tag }}
+        <div class="col-md-3 control-label">
+          {{field.label_tag}}
+        </div>
         <div class="col-sm-9">
-          {{ form.username }}
+          {{ field }}
+          {% for error in field.errors %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+
+      {% for field in account_form %}
+      <div class="form-group">
+        <div class="col-md-3 control-label">
+          {{field.label_tag}}
+        </div>
+        <div class="col-sm-9">
+          {{ field }}
+          {% for error in field.errors %}
+            <span class="help-block">{{ error|escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+          <button type="submit" class="form-control btn-orange input-lg">
+            <i class="fa fa-fw fa-check"></i>
+            Signup
+          </button>
         </div>
       </div>
     </form>    

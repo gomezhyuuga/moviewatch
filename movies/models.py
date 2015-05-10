@@ -49,11 +49,11 @@ class Film(models.Model):
 
 class Account(models.Model):
     id = models.AutoField(db_column='idAccount', primary_key=True)  # Field name made lowercase.
-    country = models.ForeignKey('Country', db_column='idCountry', blank=True, null=True)  # Field name made lowercase.
+    country = models.ForeignKey('Country', db_column='idCountry', blank=False)  # Field name made lowercase.
     username = models.CharField(max_length=45, blank=True, null=True)
-    firstname = models.CharField(db_column='firstName', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    lastname = models.CharField(db_column='lastName', max_length=45, blank=True, null=True)  # Field name made lowercase.
-    email = models.CharField(max_length=45, blank=True, null=True)
+    firstname = models.CharField(db_column='firstName', max_length=45, blank=False)  # Field name made lowercase.
+    lastname = models.CharField(db_column='lastName', max_length=45, blank=False)  # Field name made lowercase.
+    email = models.CharField(max_length=45, blank=False)
     address = models.CharField(max_length=45, blank=True, null=True)
     member_since = models.DateField(db_column='memberSince', blank=True, null=True)  # Field name made lowercase.
     password = models.CharField(max_length=45, blank=True, null=True)

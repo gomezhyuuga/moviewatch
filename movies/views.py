@@ -5,28 +5,39 @@ from .filters import FilmFilter
 from django.contrib.auth import logout, authenticate, login
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
+from django.contrib.auth.forms import UserCreationForm
 
-from .forms import SignupForm
+from .forms import AccountForm, SignupForm
 
 def index(request):
-  return HttpResponse("INDEX PAGE")
+  c = RequestContext(request)
+  return render_to_response('movies/index.html', c)
 
 def signup(request):
   c = RequestContext(request)
-  form = SignupForm
-  c.push({'form': form})
-
-  return render_to_response('movies/signup.html', c)
+  a_form = AccountForm(request.POST)
+  u_form = SignupForm(request.POST)
+  c.push({'account_form': a_form, 'user_form': u_form})
+  
+  if request.method == 'GET':
+    return render_to_response('movies/signup.html', c)
+  elif request.method == 'POST':
+    if a_form.is_valid() and u_form.is_valid():
+      
+      return HttpResponse('VALID FORM!')
+    else:
+      return render_to_response('movies/signup.html', c)
 
 def login_user(request):
+  c = RequestContext(request)
+  if request.user.is_authenticated():
+    return redirect('movies:catalog')
   if request.method == 'GET':
-    c = RequestContext(request)
     return render_to_response('movies/login.html', c)
   elif request.method == 'POST':
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(username=username, password=password)
-    c = RequestContext(request)
     if user is not None:
       if user.is_active:
         # Redirect to a success page.

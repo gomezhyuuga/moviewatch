@@ -267,14 +267,57 @@ span.rating {
   background-color: #26292E;
 }
 
-#login-page h1 {
+#login-page h1, #signup-page h1 {
   text-align: center;
   margin-bottom: 1em;
 }
-#login-page {
-  margin-bottom: 5em;
+#login-page, #signup-page {
+  margin-bottom: 3em;
 }
 
+#index-page #feature {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+#index-page #feature {
+  padding-top: 6em;
+  /* MovieWatch: */
+  letter-spacing: 0.3px;
+  text-shadow: 0px 0px 25px rgba(0,0,0,1);
+}
+#index-page #feature h1 {
+  color: #FFF;
+  font-family: 'Titillium Web', sans-serif;
+}
+#index-page #feature p {
+  font-size: 1.5em;
+  color: #FFF;
+  margin-bottom: 3em;
+}
+#index-page #feature p.display {
+  margin-top: 1em;
+  font-weight: bold;
+  font-size: 2em;
+}
+#index-page #feature .btn-orange {
+  /* Rectangle 2: */
+  background: #FFFFFF;
+  background-image: linear-gradient(-180deg, #E56C69 0%, #DD413E 100%);
+  border: 1px solid #A0312F;
+  box-shadow: 0px 1px 0px 0px rgba(255,255,255,0.37), inset 0px 1px 0px 0px rgba(255,255,255,0.40);
+  border-radius: 4px;
+  /* Signup: */
+  font-family: TitilliumWeb-SemiBold;
+  font-size: 20px;
+  color: #FFFFFF;
+  letter-spacing: 0.16px;
+  line-height: 31px;
+  padding-left: 2em;
+  padding-right: 2em;
+}
 .center {
   text-align: center;
 }
