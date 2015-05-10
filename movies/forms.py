@@ -24,6 +24,12 @@ class AccountForm(ModelForm):
     }
 
 class SignupForm(UserCreationForm):
+  email = forms.EmailField(required=True,
+    widget=EmailInput(attrs={
+            'class': 'form-control input-lg',
+            'autocomplete': 'off',
+            'required': 'required',
+            'placeholder': 'best@moviewatch.com'}))
   password1 = forms.CharField(label="Password",
         widget=PasswordInput(attrs={
         'class': 'form-control input-lg',
@@ -36,14 +42,10 @@ class SignupForm(UserCreationForm):
         'placeholder': '******'}))
   class Meta:
     model = User
-    fields = ['username']
+    fields = ['username', 'email']
     widgets = {
       'username': TextInput(attrs={
         'class': 'form-control input-lg',
         'autocomplete': 'off',
         'placeholder': 'Username'}),
-      'email': EmailInput(attrs={
-        'class': 'form-control input-lg',
-        'autocomplete': 'off',
-        'placeholder': 'best@moviewatch.com'}),
     }

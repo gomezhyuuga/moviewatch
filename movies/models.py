@@ -61,7 +61,9 @@ class Account(models.Model):
     user = models.OneToOneField(User)
 
     def __str__(self):
-        return self.username
+        if (self.username):
+            return self.username
+        return 'no_user'
 
     class Meta:
         managed = False

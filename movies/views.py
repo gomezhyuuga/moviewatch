@@ -23,8 +23,19 @@ def signup(request):
     return render_to_response('movies/signup.html', c)
   elif request.method == 'POST':
     if a_form.is_valid() and u_form.is_valid():
-      
-      return HttpResponse('VALID FORM!')
+      account = a_form.save(commit=False)
+      user = u_form.save()
+      user.first_name = account.firstname
+      user.last_name = account.lastname
+      account.user = user
+      account.username = user.username
+      account.email = user.email
+      account.password = user.password
+      account.save()
+      user.save()
+
+      # Redirect to a success page.
+      return redirect('movies:catalog')
     else:
       return render_to_response('movies/signup.html', c)
 
@@ -56,6 +67,10 @@ def logout(request):
   # return redirect(reverse('movies:index'))
 
 def catalog(request):
+  c = RequestContext(request)
+  if not request.user.is_authenticated():
+    return redirect('movies:login')
+
   genres = Film.objects.order_by('genre').values('genre').distinct()
 
   context = RequestContext(request)
