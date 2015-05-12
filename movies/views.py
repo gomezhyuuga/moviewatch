@@ -1,17 +1,57 @@
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
 from django.http import HttpResponse
-from .models import Film
+from .models import *
 from .filters import FilmFilter
 from django.contrib.auth import logout, authenticate, login
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import UserCreationForm
 
-from .forms import AccountForm, SignupForm
+from .forms import *
 
 def index(request):
   c = RequestContext(request)
   return render_to_response('movies/index.html', c)
+
+def account(request):
+  c = RequestContext(request)
+  user = request.user
+  account = Account.objects.get(user=user)
+  if (request.method == 'GET'):
+    a_form = AccountSettingsForm(instance=account)
+    u_form = UserSettingsForm(instance=user)
+    # u_form.fields['username'].widget.attrs['disabled'] = True
+    # a_form.fields['country'].widget.attrs['disabled'] = True
+    c.push({'account_form': a_form, 'user_form': u_form})
+    return render_to_response('movies/account.html', c)
+
+  elif request.method == 'POST':
+    a_form = AccountSettingsForm(request.POST, instance=account)
+    u_form = UserSettingsForm(request.POST, instance=user)
+    # u_form.fields['username'].widget.attrs['readonly'] = True
+    # a_form.fields['country'].widget.attrs['disabled'] = True
+    # Si no actualiza password eliminar del form
+    passwd = request.POST.get("password1","")
+    if not passwd or passwd == "":
+      del u_form.fields['password1']
+      del u_form.fields['password2']
+
+    c.push({'account_form': a_form, 'user_form': u_form})
+    if a_form.is_valid() and u_form.is_valid():
+      account = a_form.save(commit=False)
+      user = u_form.save()
+      user.first_name = account.firstname
+      user.last_name = account.lastname
+      account.email = user.email
+      account.password = user.password
+      account.save()
+      user.save()
+
+      # Redirect to a success page.
+      return redirect('movies:account')
+    else:
+      return render_to_response('movies/account.html', c)
+
 
 def signup(request):
   c = RequestContext(request)

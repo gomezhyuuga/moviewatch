@@ -260,7 +260,7 @@ span.rating {
   border: 1px solid #010101;
 }
 #film-video video {
-  /*width: 80%;*/
+  width: 100%;
   display: block;
   margin-left: auto;
   margin-right: auto;

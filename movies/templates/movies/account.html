@@ -1,0 +1,52 @@
+{% extends "movies/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<h2>Cuenta</h2>
+<section id="user-account-details">
+<form action="{% url "movies:account" %}" method="POST" class="form-horizontal">
+  {% csrf_token %}
+
+  {% for field in user_form %}
+  <div class="form-group">
+    <div class="col-md-3 control-label">
+      {{field.label_tag}}
+    </div>
+    <div class="col-sm-9">
+      {{ field }}
+      {% for error in field.errors %}
+        <span class="help-block">{{ error|escape }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  {% for field in account_form %}
+  <div class="form-group">
+    <div class="col-md-3 control-label">
+      {{field.label_tag}}
+    </div>
+    <div class="col-sm-9">
+      {{ field }}
+      {% for error in field.errors %}
+        <span class="help-block">{{ error|escape }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="form-group">
+    <div class="col-sm-9 col-sm-offset-3">
+      <button type="submit" class="form-control btn-orange input-lg">
+        <i class="fa fa-fw fa-check"></i>
+        Actualizar
+      </button>
+    </div>
+  </div>
+</form>
+  
+</section>
+
+
+{% endblock %}
