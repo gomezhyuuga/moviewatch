@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, get_object_or_404, render_to_response, redirect
 from django.http import HttpResponse
 from .models import *
@@ -11,7 +12,36 @@ from .forms import *
 
 def index(request):
   c = RequestContext(request)
+  if request.user.is_authenticated():
+    return redirect('movies:catalog')
   return render_to_response('movies/index.html', c)
+
+
+# Revisar si ya calificó solamente actualizar
+# Si no existe entonces crear
+@csrf_exempt
+def update_rating(request):
+  # Obtener datos
+  c = RequestContext(request)
+  user = request.user
+  account = Account.objects.get(user=user)
+  rating = int(request.POST.get("rating", ""))
+  print("RATING: %d"%rating)
+  id_film = request.POST.get("film", "")
+  film = Film.objects.get(pk=id_film)
+
+  # Revisar si ya calificó
+  try:
+    userRating = UserRating.objects.get(account=account, film=film)
+  except UserRating.DoesNotExist:
+    # Crear calificación
+    userRating = UserRating()
+    userRating.account = account
+    userRating.film = film
+
+  userRating.rating = rating
+  userRating.save()
+  return HttpResponse("OK")
 
 def account(request):
   c = RequestContext(request)

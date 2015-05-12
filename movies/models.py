@@ -114,8 +114,11 @@ class UserRating(models.Model):
     rating = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
+        if not self.account or not self.film:
+            return "Invalid"
         return "%s: %d > %s"%(self.account.username, self.rating, self.film.name)
 
     class Meta:
         managed = False
+        unique_together = ("account", "film")
         db_table = 'UserRating'
