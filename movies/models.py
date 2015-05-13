@@ -11,10 +11,45 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.signals import post_save, post_delete
+
 
 from django.db import models
 
 class Film(models.Model):
+    id = models.AutoField(db_column='idFilm', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(max_length=100, blank=True, null=True)
+    genre = models.CharField(max_length=45, blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    releasedate = models.DateField(db_column='releaseDate', blank=True, null=True)  # Field name made lowercase.
+    director = models.CharField(max_length=200, blank=True, null=True)
+    duration = models.IntegerField(blank=True, null=True)
+    # filepath = models.CharField(max_length=200, blank=True, null=True)
+    filepath = models.FileField(upload_to='films', blank=True)
+    poster = models.ImageField(upload_to='posters/%Y%m%d',blank=True)
+
+    def poster_url(self):
+        if self.poster and self.poster.url:
+            return self.poster.url
+        else:
+            return "movies/images/no_poster.png"
+    def film_url(self):
+        if self.filepath and self.filepath.url:
+            return self.filepath.url
+        else:
+            return "/media/films/no_film.webm"
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        managed = False
+        db_table = 'Film'
+        ordering = ['name']
+
+class SlaveCatalog(models.Model):
     id = models.AutoField(db_column='idFilm', primary_key=True)  # Field name made lowercase.
     name = models.CharField(max_length=100, blank=True, null=True)
     genre = models.CharField(max_length=45, blank=True, null=True)
@@ -82,6 +117,7 @@ class Catalog(models.Model):
         db_table = 'Catalog'
 
 
+
 class Country(models.Model):
     id = models.AutoField(db_column='idCountry', primary_key=True)  # Field name made lowercase.
     name = models.CharField(max_length=45, blank=True, null=True)
@@ -94,17 +130,6 @@ class Country(models.Model):
         managed = False
         db_table = 'Country'
 
-class FilmCatalog(models.Model):
-    id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
-    film = models.ForeignKey(Film, db_column='idFilm')  # Field name made lowercase.
-    catalog = models.ForeignKey(Catalog, db_column='idCatalog')  # Field name made lowercase.
-
-    def __str__(self):
-        return "%s: %s"%(self.film.name, self.catalog.name)
-
-    class Meta:
-        managed = False
-        db_table = 'FilmCatalog'
 
 
 class UserRating(models.Model):
@@ -122,3 +147,163 @@ class UserRating(models.Model):
         managed = False
         unique_together = ("account", "film")
         db_table = 'UserRating'
+
+
+class AmericanCatalog(models.Model):
+    id = models.AutoField(db_column='idFilm', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(max_length=100, blank=False, null=True)
+    genre = models.CharField(max_length=45, blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    releasedate = models.DateField(db_column='releaseDate', blank=True, null=True)  # Field name made lowercase.
+    director = models.CharField(max_length=200, blank=True, null=True)
+    duration = models.IntegerField(blank=True, null=True)
+    # filepath = models.CharField(max_length=200, blank=True, null=True)
+    filepath = models.FileField(upload_to='films', blank=True)
+    poster = models.ImageField(upload_to='posters/%Y%m%d',blank=True)
+
+    def poster_url(self):
+        if self.poster and self.poster.url:
+            return self.poster.url
+        else:
+            return "movies/images/no_poster.png"
+    def film_url(self):
+        if self.filepath and self.filepath.url:
+            return self.filepath.url
+        else:
+            return "/media/films/no_film.webm"
+
+    def __str__(self):
+        if not self.name:
+            return "No name"
+        return self.name
+
+    class Meta:
+        managed = False
+        db_table = 'AmericanCatalog'
+        ordering = ['name']
+
+
+
+class AsianCatalog(models.Model):
+    id = models.AutoField(db_column='idFilm', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(max_length=100, blank=False, null=True)
+    genre = models.CharField(max_length=45, blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    releasedate = models.DateField(db_column='releaseDate', blank=True, null=True)  # Field name made lowercase.
+    director = models.CharField(max_length=200, blank=True, null=True)
+    duration = models.IntegerField(blank=True, null=True)
+    # filepath = models.CharField(max_length=200, blank=True, null=True)
+    filepath = models.FileField(upload_to='films', blank=True)
+    poster = models.ImageField(upload_to='posters/%Y%m%d',blank=True)
+
+    def poster_url(self):
+        if self.poster and self.poster.url:
+            return self.poster.url
+        else:
+            return "movies/images/no_poster.png"
+    def film_url(self):
+        if self.filepath and self.filepath.url:
+            return self.filepath.url
+        else:
+            return "/media/films/no_film.webm"
+
+    def __str__(self):
+        if not self.name:
+            return "No name"
+        return self.name
+
+    class Meta:
+        managed = False
+        db_table = 'AsianCatalog'
+        ordering = ['name']
+
+
+
+class EuropeanCatalog(models.Model):
+    id = models.AutoField(db_column='idFilm', primary_key=True)  # Field name made lowercase.
+    name = models.CharField(max_length=100, blank=False, null=True)
+    genre = models.CharField(max_length=45, blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    releasedate = models.DateField(db_column='releaseDate', blank=True, null=True)  # Field name made lowercase.
+    director = models.CharField(max_length=200, blank=True, null=True)
+    duration = models.IntegerField(blank=True, null=True)
+    # filepath = models.CharField(max_length=200, blank=True, null=True)
+    filepath = models.FileField(upload_to='films', blank=True)
+    poster = models.ImageField(upload_to='posters/%Y%m%d',blank=True)
+
+    def poster_url(self):
+        if self.poster and self.poster.url:
+            return self.poster.url
+        else:
+            return "movies/images/no_poster.png"
+    def film_url(self):
+        if self.filepath and self.filepath.url:
+            return self.filepath.url
+        else:
+            return "/media/films/no_film.webm"
+
+    def __str__(self):
+        if not self.name:
+            return "No name"
+        return self.name
+
+    class Meta:
+        managed = False
+        db_table = 'EuropeanCatalog'
+        ordering = ['name']
+
+
+class FilmCatalog(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)  # Field name made lowercase.
+    film = models.ForeignKey(Film, db_column='idFilm')  # Field name made lowercase.
+    catalog = models.ForeignKey(Catalog, db_column='idCatalog')  # Field name made lowercase.
+
+    def __str__(self):
+        return "%s: %s"%(self.film.name, self.catalog.name)
+
+    class Meta:
+        managed = False
+        db_table = 'FilmCatalog'
+
+def copy_film(sender, instance, **kwargs):
+    print("Diplicating... ")
+    print(instance)
+    if instance.catalog.id == 1:
+        copy = AmericanCatalog()
+    elif instance.catalog.id == 2:
+        copy = EuropeanCatalog()
+    else:
+        copy = AsianCatalog()
+    film = instance.film
+    copy.id = film.id
+    copy.name = film.name
+    copy.genre = film.genre
+    copy.rating = film.rating
+    copy.description = film.description
+    copy.releasedate = film.releasedate
+    copy.director = film.director
+    copy.duration = film.duration
+    copy.filepath = film.filepath
+    copy.poster = film.poster
+    copy.save()
+    print("SAVED COPY OF: ")
+    print(copy)
+
+def post_delete_film(sender, instance, **kwargs):
+    try:
+        if instance.catalog.id == 1:
+            f = AmericanCatalog.objects.get(pk=instance.film.id)
+        elif instance.catalog.id == 2:
+            f = EuropeanCatalog.objects.get(pk=instance.film.id)
+        else:
+            f = AsianCatalog.objects.get(pk=instance.film.id)
+        f.delete()
+        print("DELETED FILM FROM CATALOG")
+    except ObjectDoesNotExist:
+        pass
+
+post_save.connect(copy_film, sender=FilmCatalog, dispatch_uid="duplicate_film_in_catalog")
+post_delete.connect(post_delete_film, sender=FilmCatalog, dispatch_uid="delete_film_in_catalog")

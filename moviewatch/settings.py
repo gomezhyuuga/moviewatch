@@ -81,14 +81,32 @@ WSGI_APPLICATION = 'moviewatch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
+        'PORT': 3307,
+        'NAME': 'moviewatch',
+        'USER': 'appuser',
+        'PASSWORD': '1234',
+    },
+    'master': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',
+        'PORT': 3307,
+        'NAME': 'moviewatch',
+        'USER': 'appuser',
+        'PASSWORD': '1234',
+    },
+    'slave': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '127.0.0.1',
         'PORT': 3306,
         'NAME': 'moviewatch',
         'USER': 'appuser',
         'PASSWORD': '1234',
     }
 }
-# DATABASE_ROUTERS = ['SlaveRouter']
+# ROUTERS
+#DATABASE_ROUTERS = ['moviewatch.routers.AuthRouter', 'moviewatch.routers.AdminRouter', 'moviewatch.routers.PrimaryReplicaRouter']
+
 FILM_CATALOG = 'Film'
 
 # Internationalization

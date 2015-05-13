@@ -1,0 +1,51 @@
+# 1) Crear usuario en slave que permite replica
+CREATE USER 'slave'@'%' IDENTIFIED BY 'slave';
+GRANT REPLICATION SLAVE ON *.* TO 'slave'@'%';
+
+# 2) Configurar my.cnf
+bind-address            = 0.0.0.0
+server-id               = 1
+log_bin                 = "mysql-bin"
+binlog_ignore_db        = "mysql"
+binlog_ignore_db        = "information_schema"
+binlog_ignore_db        = "performance_schema"
+binlog_format           = "ROW"
+
+# 3) Mostrar status
+SHOW MASTER STATUS;
+# mysql-bin.000001       331               mysql,information_schema,performance_schema
+#| mysql-bin.000001 |      107 |              | mysql,information_schema,performance_schema |
+
+# 2) En SLAVE i my.cnf
+bind-address    = 0.0.0.0
+# server-id       = i
+server-id       = 2
+log_bin
+master-host     = 10.0.2.15
+master-user     = slave
+master-password = slave
+master-connect-retry = 60
+# Ignore TABLES
+# replicate-ignore-table = "moviewatch.Account"
+replicate-ignore-table = "moviewatch.AsianAccount"
+replicate-ignore-table = "moviewatch.EuropeanAccount"
+replicate-ignore-table = "moviewatch.Catalog"
+# replicate-ignore-table = "moviewatch.Country"
+replicate-ignore-table = "moviewatch.Film"
+replicate-ignore-table = "moviewatch.FilmCatalog"
+replicate-ignore-table = "moviewatch.AsianCatalog"
+replicate-ignore-table = "moviewatch.EuropeanCatalog"
+replicate-ignore-table = "moviewatch.UserRating"
+
+# 3) En consola de SLAVE i
+CHANGE MASTER TO
+  MASTER_HOST='127.0.0.1',
+  MASTER_USER='slave',
+  MASTER_PASSWORD='slave',
+  MASTER_PORT=3307,
+  MASTER_LOG_FILE='mysql-bin.000001',
+  MASTER_LOG_POS=107,
+  MASTER_CONNECT_RETRY=30;
+# FIX
+#SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;
+

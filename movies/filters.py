@@ -1,7 +1,7 @@
 import django_filters
 from django import forms
 from django_filters.widgets import LinkWidget
-from .models import Film
+from .models import Film, SlaveCatalog
 from django.shortcuts import render
 
 class FilmFilter(django_filters.FilterSet):
@@ -13,5 +13,5 @@ class FilmFilter(django_filters.FilterSet):
       ))
     # director = django_filters.AllValuesFilter(widget=LinkWidget, label='Director')
     class Meta:
-        model = Film
+        model = SlaveCatalog
         fields = ['genre', 'name']

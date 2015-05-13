@@ -28,7 +28,7 @@ def update_rating(request):
   rating = int(request.POST.get("rating", ""))
   print("RATING: %d"%rating)
   id_film = request.POST.get("film", "")
-  film = Film.objects.get(pk=id_film)
+  film = SlaveCatalog.objects.get(pk=id_film)
 
   # Revisar si ya calificó
   try:
@@ -141,17 +141,17 @@ def catalog(request):
   if not request.user.is_authenticated():
     return redirect('movies:login')
 
-  genres = Film.objects.order_by('genre').values('genre').distinct()
+  genres = SlaveCatalog.objects.order_by('genre').values('genre').distinct()
 
   context = RequestContext(request)
 
-  film_list = Film.objects.all()
-  f = FilmFilter(request.GET, queryset=Film.objects.all())
+  film_list = SlaveCatalog.objects.all()
+  f = FilmFilter(request.GET, queryset=SlaveCatalog.objects.all())
   # print(f.__dict__)
   context.push( {'filter': f, 'list': film_list, 'genre_list': genres} )
   return render_to_response('movies/catalog.html', context)
 
 def detail(request, film_id):
-  film = get_object_or_404(Film, pk=film_id)
+  film = get_object_or_404(SlaveCatalog, pk=film_id)
   context = {'film': film}
   return render(request, "movies/detail.html", context)
