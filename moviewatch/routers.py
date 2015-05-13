@@ -17,9 +17,10 @@ class AuthRouter(object):
         """
         Attempts to write auth models go to auth_db.
         """
-        if model._meta.app_label == 'auth':
-            return 'master'
-        return None
+        return 'master'
+        # if model._meta.app_label == 'auth':
+        #     return 'master'
+        # return None
 
     def allow_relation(self, obj1, obj2, **hints):
         """
@@ -85,6 +86,9 @@ class PrimaryReplicaRouter(object):
         """
         Reads go to a randomly-chosen replica.
         """
+        mname = model._meta.model_name
+        if  mname == 'film' or mname == 'userrating' or mname == 'account':
+            return 'master'
         return 'default'
 
     def db_for_write(self, model, **hints):

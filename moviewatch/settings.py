@@ -82,15 +82,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': '127.0.0.1',
-        'PORT': 3307,
+        'PORT': 3306,
         'NAME': 'moviewatch',
         'USER': 'appuser',
         'PASSWORD': '1234',
     },
     'master': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '127.0.0.1',
-        'PORT': 3307,
+        'HOST': '10.48.90.139',
+        'PORT': 3306,
         'NAME': 'moviewatch',
         'USER': 'appuser',
         'PASSWORD': '1234',
@@ -105,9 +105,9 @@ DATABASES = {
     }
 }
 # ROUTERS
-#DATABASE_ROUTERS = ['moviewatch.routers.AuthRouter', 'moviewatch.routers.AdminRouter', 'moviewatch.routers.PrimaryReplicaRouter']
+DATABASE_ROUTERS = ['moviewatch.routers.AuthRouter', 'moviewatch.routers.AdminRouter', 'moviewatch.routers.PrimaryReplicaRouter']
 
-FILM_CATALOG = 'Film'
+FILM_CATALOG = 'AmericanCatalog'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

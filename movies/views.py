@@ -28,7 +28,7 @@ def update_rating(request):
   rating = int(request.POST.get("rating", ""))
   print("RATING: %d"%rating)
   id_film = request.POST.get("film", "")
-  film = SlaveCatalog.objects.get(pk=id_film)
+  film = Film.objects.get(pk=id_film)
 
   # Revisar si ya calificó
   try:
