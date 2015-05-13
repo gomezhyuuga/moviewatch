@@ -39,13 +39,14 @@ replicate-ignore-table = "moviewatch.UserRating"
 
 # 3) En consola de SLAVE i
 CHANGE MASTER TO
-  MASTER_HOST='127.0.0.1',
-  MASTER_USER='slave',
-  MASTER_PASSWORD='slave',
-  MASTER_PORT=3307,
+  MASTER_HOST='10.48.90.139',
+  MASTER_USER='slave1',
+  MASTER_PASSWORD='slave1',
+  MASTER_PORT=3306,
   MASTER_LOG_FILE='mysql-bin.000001',
   MASTER_LOG_POS=107,
   MASTER_CONNECT_RETRY=30;
 # FIX
 #SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;
 
+show slave status\G
