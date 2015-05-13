@@ -268,6 +268,14 @@ class FilmCatalog(models.Model):
         managed = False
         db_table = 'FilmCatalog'
 
+# def copy_account(sender, instance, **kwargs):
+#     if instance.catalog.id == 1:
+#         copy = AmericanCatalog()
+#     elif instance.catalog.id == 2:
+#         copy = EuropeanCatalog()
+#     else:
+#         copy = AsianCatalog()
+
 def copy_film(sender, instance, **kwargs):
     print("Diplicating... ")
     print(instance)
