@@ -1,3 +1,4 @@
+# -*- encoding: utf8 -*-
 import django_filters
 from django import forms
 from django_filters.widgets import LinkWidget
