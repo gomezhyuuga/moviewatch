@@ -10,7 +10,7 @@ class FilmFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(lookup_type='icontains', label='',
       widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Teclea el nombre de la película...'}
+        'placeholder': 'Type the movie\'s name...'}
       ))
     # director = django_filters.AllValuesFilter(widget=LinkWidget, label='Director')
     class Meta:

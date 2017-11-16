@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
-    'debug_toolbar',
+    #'debug_toolbar',
     'movies',
 )
 
@@ -89,23 +89,14 @@ DATABASES = {
     },
     'master': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '10.48.90.139',
-        'PORT': 3306,
-        'NAME': 'moviewatch',
-        'USER': 'appuser',
-        'PASSWORD': '1234',
-    },
-    'slave': {
-        'ENGINE': 'django.db.backends.mysql',
         'HOST': '127.0.0.1',
         'PORT': 3306,
         'NAME': 'moviewatch',
         'USER': 'appuser',
         'PASSWORD': '1234',
-    }
+    },
 }
 # ROUTERS
-DATABASE_ROUTERS = ['moviewatch.routers.AuthRouter', 'moviewatch.routers.AdminRouter', 'moviewatch.routers.PrimaryReplicaRouter']
 
 FILM_CATALOG = 'AmericanCatalog'
 

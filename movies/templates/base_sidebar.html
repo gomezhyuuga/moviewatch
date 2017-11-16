@@ -1,10 +1,10 @@
-<h2>Géneros</h2>
+<h2>Genres</h2>
 <ul>
   <li>
     {% if filter.data %}
     <a href="{% url 'movies:catalog' %}">Todos</a>
     {% else %}
-    <a class="selected" href="{% url 'movies:catalog' %}">Todos</a>
+    <a class="selected" href="{% url 'movies:catalog' %}">All</a>
     {% endif %}
   </li>
 </ul>

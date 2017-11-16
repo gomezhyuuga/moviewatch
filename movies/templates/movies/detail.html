@@ -31,11 +31,11 @@
           <h2>{{ film.name }}</h2>
           <h6>Director:</h6> <a href="#">{{ film.director | title }}</a>
           <br>
-          <h6>Género: </h6> <a href="#">{{ film.genre | title }}</a>
+          <h6>Genre: </h6> <a href="#">{{ film.genre | title }}</a>
           <br>
-          <h6>Lanzamiento: </h6> {{ film.releasedate }}
+          <h6>Release: </h6> {{ film.releasedate }}
           <br>
-          <h6>Duración: </h6> {{ film.duration }}
+          <h6>Duration: </h6> {{ film.duration }}
         </div>
         <!-- RATING BOX -->
         <div class="col-md-4">
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-      <h3>Sinópsis</h3>
+      <h3>Synopsis</h3>
       <p>
         {{ film.description }}
       </p>
